@@ -1,6 +1,5 @@
 *.egg-info
 __pycache__
-poetry.lock
 build
 dist
 venv
