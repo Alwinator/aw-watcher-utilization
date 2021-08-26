@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "aw-watcher-utilization"
+version = "1.0.0"
+description = "An Activity Watch watcher which monitors CPU, RAM, GPU and disk usage."
+authors = ["Alwin Schuster"]
+license = "MPL-2.0"
+homepage = "https://alwinschuster.at"
+repository = "https://github.com/Alwinator/aw-watcher-utilization"
+documentation = "https://github.com/Alwinator/aw-watcher-utilization"
+
+[tool.poetry.scripts]
+aw-watcher-utilization = "aw_watcher_utilization:main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+psutil = "^5.8.0"
+aw-core = {git = "https://github.com/ActivityWatch/aw-core.git"}
+aw-client = {git = "https://github.com/ActivityWatch/aw-client.git"}
+
+[tool.poetry.dev-dependencies]
+pyinstaller = "^4.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
