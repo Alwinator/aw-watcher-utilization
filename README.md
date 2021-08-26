@@ -346,6 +346,10 @@ Add the aw-table-utilization to autostart_modules to enable auto-start. It shoul
 [aw-qt]
 autostart_modules = ["aw-server", "aw-watcher-afk", "aw-watcher-window", "aw-watcher-utilization"]
 ```
+5. [Linux only]: Make the executable file in the aw-watcher-utilization folder executable:
+```
+chmod +x ./aw-watcher-utilization
+```
 
 ## Testing
 Unfortunately, I have a limited amount of computers, so bug reports are always very welcomed!
