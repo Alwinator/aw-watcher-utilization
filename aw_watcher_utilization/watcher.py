@@ -49,5 +49,5 @@ class UtilizationWatcher:
                 self.ping(table_height)
                 sleep(self.settings.poll_time)
             except KeyboardInterrupt:
-                logger.info("aw-watcher-table stopped by keyboard interrupt")
+                logger.info("aw-watcher-utilization stopped by keyboard interrupt")
                 break
