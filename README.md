@@ -4,7 +4,7 @@ An [Activity Watch](https://github.com/ActivityWatch/activitywatch) watcher that
 
 It is basically a [psutil](https://github.com/giampaolo/psutil) wrapper for [Activity Watch](https://github.com/ActivityWatch/activitywatch). I have only left out some too detailed information.
 
-It creates a dump every n seconds. (Can be cahnged in the config, default 5 seconds) Here you can see an example data dump:
+It creates a data dump every n seconds. (Can be changed in the config, default 5 seconds) Here you can see an example data dump:
 <details>
 <summary>Expand to see the data dump</summary>
 <pre>
@@ -333,12 +333,13 @@ It creates a dump every n seconds. (Can be cahnged in the config, default 5 seco
 </pre>
 </details>
 
-On supported devices you also see the fans and the battery.
+On supported devices you also see fans and the battery.
 
 ## Install
 1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases)
-2. Unzip and move the aq-watcher-utilization folder to your activity watch directory
-3. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the aw-qt directory you should find an aw-qt.toml file.
+2. Unzip as aw-watcher-utilization folder
+3. Move the folder to your activity watch directory
+4. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the aw-qt directory you should find an aw-qt.toml file.
 Add the aw-table-utilization to autostart_modules to enable auto-start. It should look like this:
 
 ```
@@ -347,7 +348,7 @@ autostart_modules = ["aw-server", "aw-watcher-afk", "aw-watcher-window", "aw-wat
 ```
 
 ## Testing
-Unfortunately, I have a limited amount of computers, so I bug reports are always very welcomed!
+Unfortunately, I have a limited amount of computers, so bug reports are always very welcomed!
 
 ## Contribute
 Thanks in advance!
