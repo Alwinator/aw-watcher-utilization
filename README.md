@@ -2,9 +2,11 @@
 
 An [Activity Watch](https://github.com/ActivityWatch/activitywatch) watcher that monitors CPU, RAM, disk, network, and sensor usage.
 
-It is basically a [psutil](https://github.com/giampaolo/psutil) wrapper for [Activity Watch](https://github.com/ActivityWatch/activitywatch). I have only left out some too detailed information.
+It is basically a [psutil](https://github.com/giampaolo/psutil) wrapper for [Activity Watch](https://github.com/ActivityWatch/activitywatch). I have only left out some information that was too detailed.
 
-It creates a data dump every n seconds. (Can be changed in the config, default 5 seconds) Here you can see an example data dump:
+It creates a data dump every n-seconds. (n can be changed in the config, default 5 seconds)
+
+Here is an example data dump:
 <details>
 <summary>Expand to see the data dump</summary>
 <pre>
@@ -333,7 +335,7 @@ It creates a data dump every n seconds. (Can be changed in the config, default 5
 </pre>
 </details>
 
-On supported devices you also see fans and the battery.
+On supported devices you also see fan and battery metrics.
 
 ## Install
 1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases)
@@ -342,6 +344,7 @@ On supported devices you also see fans and the battery.
 4. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the aw-qt directory you should find an aw-qt.toml file.
 Add the aw-table-utilization to autostart_modules to enable auto-start. It should look like this:
 
+aw-qt.toml:
 ```
 [aw-qt]
 autostart_modules = ["aw-server", "aw-watcher-afk", "aw-watcher-window", "aw-watcher-utilization"]
