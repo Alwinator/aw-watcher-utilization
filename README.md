@@ -1,12 +1,9 @@
 # aw-watcher-utilization
+[![Create releases for Linux and Windows](https://github.com/Alwinator/aw-watcher-utilization/actions/workflows/build-release.yml/badge.svg)](https://github.com/Alwinator/aw-watcher-utilization/actions/workflows/build-release.yml)
 
-An [Activity Watch](https://github.com/ActivityWatch/activitywatch) watcher that monitors CPU, RAM, disk, network, and sensor usage.
+An [Activity Watch](https://github.com/ActivityWatch/activitywatch) watcher that monitors CPU, RAM, disk, network, and sensor usage. It is basically a [psutil](https://github.com/giampaolo/psutil) wrapper for [Activity Watch](https://github.com/ActivityWatch/activitywatch). I have only left out some information that was too detailed.
 
-It is basically a [psutil](https://github.com/giampaolo/psutil) wrapper for [Activity Watch](https://github.com/ActivityWatch/activitywatch). I have only left out some information that was too detailed.
-
-It creates a data dump every n-seconds. (n can be changed in the config, default 5 seconds)
-
-Here is an example data dump:
+It creates a data dump every n-seconds. (n can be changed in the config, default 5 seconds). Here is an example data dump:
 <details>
 <summary>Expand to see the data dump</summary>
 <pre>
