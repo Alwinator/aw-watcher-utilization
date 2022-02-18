@@ -1,5 +1,6 @@
 # aw-watcher-utilization
 [![Create releases for Linux and Windows](https://github.com/Alwinator/aw-watcher-utilization/actions/workflows/build-release.yml/badge.svg)](https://github.com/Alwinator/aw-watcher-utilization/actions/workflows/build-release.yml)
+[![stars](https://img.shields.io/github/stars/Alwinator/aw-watcher-utilization)](https://github.com/Alwinator/aw-watcher-utilization)
 
 An [Activity Watch](https://github.com/ActivityWatch/activitywatch) watcher that monitors CPU, RAM, disk, network, and sensor usage. It is basically a [psutil](https://github.com/giampaolo/psutil) wrapper for [Activity Watch](https://github.com/ActivityWatch/activitywatch). I have only left out some information that was too detailed.
 
