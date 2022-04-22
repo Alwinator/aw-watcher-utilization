@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aw-watcher-utilization"
-version = "1.0.0"
+version = "1.1.0"
 description = "An Activity Watch watcher which monitors CPU, RAM, GPU and disk usage."
 authors = ["Alwin Schuster"]
 license = "MPL-2.0"
