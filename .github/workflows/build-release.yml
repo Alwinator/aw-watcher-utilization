@@ -1,4 +1,4 @@
-name: Create releases for Linux, Windows and MacOS
+name: Create releases for Linux, Windows and MacOS & Test
 
 on:
   push:

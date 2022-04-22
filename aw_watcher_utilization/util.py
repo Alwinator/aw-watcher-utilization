@@ -1,184 +1,196 @@
+import logging
 from typing import Dict
 
 import psutil
 
+logger = logging.getLogger(__name__)
+
 
 def get_utilization() -> Dict:
-    cpu_times = psutil.cpu_times()
-    cpu_times_percent = psutil.cpu_times_percent()
-    cpu_percent = psutil.cpu_percent(interval=1, percpu=True)
-    cpu_states = psutil.cpu_stats()
-    cpu_freq = psutil.cpu_freq()
+    cpu_times = get_property_safe(lambda: psutil.cpu_times())
+    cpu_times_percent = get_property_safe(lambda: psutil.cpu_times_percent())
+    cpu_percent = get_property_safe(lambda: psutil.cpu_percent(interval=1, percpu=True))
+    cpu_states = get_property_safe(lambda: psutil.cpu_stats())
+    cpu_freq = get_property_safe(lambda: psutil.cpu_freq())
 
-    memory_virtual = psutil.virtual_memory()
-    memory_swap = psutil.swap_memory()
+    memory_virtual = get_property_safe(lambda: psutil.virtual_memory())
+    memory_swap = get_property_safe(lambda: psutil.swap_memory())
 
-    disk_usage = psutil.disk_usage('/')
-    disk_io_counters = psutil.disk_io_counters(perdisk=False)
+    disk_usage = get_property_safe(lambda: psutil.disk_usage('/'))
+    disk_io_counters = get_property_safe(lambda: psutil.disk_io_counters(perdisk=False))
 
-    network_io_counters = psutil.net_io_counters(pernic=True)
-    network_if_stats = psutil.net_if_stats()
+    network_io_counters = get_property_safe(lambda: psutil.net_io_counters(pernic=True))
+    network_if_stats = get_property_safe(lambda: psutil.net_if_stats())
 
-    sensors_temperatures = psutil.sensors_temperatures()
-    sensors_fans = psutil.sensors_fans()
-    sensors_battery = psutil.sensors_battery()
+    sensors_temperatures = get_property_safe(lambda: psutil.sensors_temperatures())
+    sensors_fans = get_property_safe(lambda: psutil.sensors_fans())
+    sensors_battery = get_property_safe(lambda: psutil.sensors_battery())
 
     data = {
         "cpu": {
             "times": {
-                "user": cpu_times.user,
-                "nice": cpu_times.nice,
-                "system": cpu_times.system,
-                "idle": cpu_times.idle,
-                "iowait": cpu_times.iowait,
-                "irq": cpu_times.irq,
-                "softirq": cpu_times.softirq,
-                "steal": cpu_times.steal,
-                "guest": cpu_times.guest,
+                "user": get_property_safe(lambda: cpu_times.user),
+                "nice": get_property_safe(lambda: cpu_times.nice),
+                "system": get_property_safe(lambda: cpu_times.system),
+                "idle": get_property_safe(lambda: cpu_times.idle),
+                "iowait": get_property_safe(lambda: cpu_times.iowait),
+                "irq": get_property_safe(lambda: cpu_times.irq),
+                "softirq": get_property_safe(lambda: cpu_times.softirq),
+                "steal": get_property_safe(lambda: cpu_times.steal),
+                "guest": get_property_safe(lambda: cpu_times.guest),
             },
             "times_percent": {
-                "user": cpu_times_percent.user,
-                "nice": cpu_times_percent.nice,
-                "system": cpu_times_percent.system,
-                "idle": cpu_times_percent.idle,
-                "iowait": cpu_times_percent.iowait,
-                "irq": cpu_times_percent.irq,
-                "softirq": cpu_times_percent.softirq,
-                "steal": cpu_times_percent.steal,
-                "guest": cpu_times_percent.guest,
+                "user": get_property_safe(lambda: cpu_times_percent.user),
+                "nice":  get_property_safe(lambda: cpu_times_percent.nice),
+                "system":  get_property_safe(lambda: cpu_times_percent.system),
+                "idle":  get_property_safe(lambda: cpu_times_percent.idle),
+                "iowait":  get_property_safe(lambda: cpu_times_percent.iowait),
+                "irq":  get_property_safe(lambda: cpu_times_percent.irq),
+                "softirq":  get_property_safe(lambda: cpu_times_percent.softirq),
+                "steal":  get_property_safe(lambda: cpu_times_percent.steal),
+                "guest":  get_property_safe(lambda: cpu_times_percent.guest),
             },
             "percent": cpu_percent,
             "count_logical": psutil.cpu_count(),
-            "count": psutil.cpu_count(logical=False),
+            "count": get_property_safe(lambda: psutil.cpu_count(logical=False)),
             "stats": {
-                "ctx_switches": cpu_states.ctx_switches,
-                "interrupts": cpu_states.interrupts,
-                "soft_interrupts": cpu_states.soft_interrupts,
-                "syscalls": cpu_states.syscalls
+                "ctx_switches":  get_property_safe(lambda: cpu_states.ctx_switches),
+                "interrupts":  get_property_safe(lambda: cpu_states.interrupts),
+                "soft_interrupts":  get_property_safe(lambda: cpu_states.soft_interrupts),
+                "syscalls":  get_property_safe(lambda: cpu_states.syscalls)
             },
             "freq": {
-                "current": cpu_freq.current,
-                "min": cpu_freq.min,
-                "max": cpu_freq.max,
+                "current": get_property_safe(lambda: cpu_freq.current),
+                "min": get_property_safe(lambda: cpu_freq.min),
+                "max": get_property_safe(lambda: cpu_freq.max),
             },
-            "loadavg": psutil.getloadavg()
+            "loadavg": get_property_safe(lambda: psutil.getloadavg())
         },
         "memory": {
             "virtual": {
-                "total": memory_virtual.total,
-                "available": memory_virtual.available,
-                "percent": memory_virtual.percent,
-                "used": memory_virtual.used,
-                "free": memory_virtual.free,
-                "active": memory_virtual.active,
-                "inactive": memory_virtual.inactive,
-                "buffers": memory_virtual.buffers,
-                "cached": memory_virtual.cached,
-                "shared": memory_virtual.shared,
+                "total":  get_property_safe(lambda: memory_virtual.total),
+                "available": get_property_safe(lambda: memory_virtual.available),
+                "percent": get_property_safe(lambda: memory_virtual.percent),
+                "used": get_property_safe(lambda: memory_virtual.used),
+                "free": get_property_safe(lambda: memory_virtual.free),
+                "active": get_property_safe(lambda: memory_virtual.active),
+                "inactive": get_property_safe(lambda: memory_virtual.inactive),
+                "buffers": get_property_safe(lambda: memory_virtual.buffers),
+                "cached": get_property_safe(lambda: memory_virtual.cached),
+                "shared": get_property_safe(lambda: memory_virtual.shared),
             },
             "swap": {
-                "total": memory_swap.total,
-                "used": memory_swap.used,
-                "free": memory_swap.free,
-                "percent": memory_swap.percent,
-                "sin": memory_swap.sin,
-                "sout": memory_swap.sout
+                "total": get_property_safe(lambda: memory_swap.total),
+                "used": get_property_safe(lambda: memory_swap.used),
+                "free": get_property_safe(lambda: memory_swap.free),
+                "percent": get_property_safe(lambda: memory_swap.percent),
+                "sin": get_property_safe(lambda: memory_swap.sin),
+                "sout": get_property_safe(lambda: memory_swap.sout)
             }
         },
         "disk": {
             "usage": {
-                "total": disk_usage.total,
-                "used": disk_usage.used,
-                "free": disk_usage.free,
-                "percent": disk_usage.percent
+                "total": get_property_safe(lambda: disk_usage.total),
+                "used": get_property_safe(lambda: disk_usage.used),
+                "free": get_property_safe(lambda: disk_usage.free),
+                "percent": get_property_safe(lambda: disk_usage.percent)
             },
             "io_counters": {
-                "read_count": disk_io_counters.read_count,
-                "write_count": disk_io_counters.write_count,
-                "read_bytes": disk_io_counters.read_bytes,
-                "write_bytes": disk_io_counters.write_bytes,
-                "read_time": disk_io_counters.read_time,
-                "write_time": disk_io_counters.write_time,
-                "read_merged_count": disk_io_counters.read_merged_count,
-                "write_merged_count": disk_io_counters.write_merged_count,
-                "busy_time": disk_io_counters.busy_time,
+                "read_count": get_property_safe(lambda: disk_io_counters.read_count),
+                "write_count": get_property_safe(lambda: disk_io_counters.write_count),
+                "read_bytes": get_property_safe(lambda: disk_io_counters.read_bytes),
+                "write_bytes": get_property_safe(lambda: disk_io_counters.write_bytes),
+                "read_time": get_property_safe(lambda: disk_io_counters.read_time),
+                "write_time": get_property_safe(lambda: disk_io_counters.write_time),
+                "read_merged_count": get_property_safe(lambda: disk_io_counters.read_merged_count),
+                "write_merged_count": get_property_safe(lambda: disk_io_counters.write_merged_count),
+                "busy_time": get_property_safe(lambda: disk_io_counters.busy_time),
             }
         },
         "network": {
-            "io_counters": {
-                key: parse_net_io_counter(network_io_counters[key]) for key in network_io_counters
-            },
-            "net_if_stats": {
-                key: parse_net_if_stat(network_if_stats[key]) for key in network_if_stats
-            }
+            "io_counters": iterate_safe(lambda x: parse_net_io_counter(x), network_io_counters),
+            "net_if_stats": iterate_safe(lambda x: parse_net_if_stat(x), network_if_stats),
         },
         "sensors": {
-            "temperatures": {
-                key: list(map(parse_temperature, sensors_temperatures[key])) for key in sensors_temperatures
-            },
-            "fans": {
-                key: list(map(parse_fan, sensors_fans[key])) for key in sensors_fans
+            "temperatures": iterate_safe(lambda x: list(map(parse_temperature, x)), sensors_temperatures),
+            "fans": iterate_safe(lambda x: list(map(parse_fan, x)), sensors_fans),
+            "battery": {
+                "percent": get_property_safe(lambda: sensors_battery.percent),
+                "secsleft": get_property_safe(lambda: sensors_battery.secsleft),
+                "power_plugged": get_property_safe(lambda: sensors_battery.power_plugged),
             }
         },
         "other": {
-            "users": list(map(parse_user, psutil.users())),
-            "boot_time": psutil.boot_time()
+            "users": get_property_safe(lambda: list(map(parse_user, psutil.users()))),
+            "boot_time": get_property_safe(lambda: psutil.boot_time())
         }
     }
-
-    if sensors_battery:
-        data["sensors"]["battery"] = {
-            "percent": sensors_battery.percent,
-            "secsleft": sensors_battery.secsleft,
-            "power_plugged": sensors_battery.power_plugged,
-        }
 
     return data
 
 
+def iterate_safe(callback, dict_object):
+    if not dict_object:
+        return None
+
+    return {
+        key: callback(dict_object[key]) for key in dict_object
+    }
+
+
+def get_property_safe(callback):
+    try:
+        return callback()
+    except AttributeError:
+        return None
+    except Exception as ex:
+        logger.exception(ex)
+        return None
+
+
 def parse_net_io_counter(counter):
     return {
-        "bytes_sent": counter.bytes_sent,
-        "bytes_recv": counter.bytes_recv,
-        "packets_sent": counter.packets_sent,
-        "packets_recv": counter.packets_recv,
-        "errin": counter.errin,
-        "errout": counter.errout,
-        "dropin": counter.dropin,
-        "dropout": counter.dropout,
+        "bytes_sent": get_property_safe(lambda: counter.bytes_sent),
+        "bytes_recv": get_property_safe(lambda: counter.bytes_recv),
+        "packets_sent": get_property_safe(lambda: counter.packets_sent),
+        "packets_recv": get_property_safe(lambda: counter.packets_recv),
+        "errin": get_property_safe(lambda: counter.errin),
+        "errout": get_property_safe(lambda: counter.errout),
+        "dropin": get_property_safe(lambda: counter.dropin),
+        "dropout": get_property_safe(lambda: counter.dropout),
     }
 
 
 def parse_net_if_stat(stat):
     return {
-        "isup": stat.isup,
-        "duplex": stat.duplex,
-        "speed": stat.speed,
-        "mtu": stat.mtu,
+        "isup": get_property_safe(lambda: stat.isup),
+        "duplex": get_property_safe(lambda: stat.duplex),
+        "speed": get_property_safe(lambda: stat.speed),
+        "mtu": get_property_safe(lambda: stat.mtu),
     }
 
 
 def parse_user(user):
     return {
-        "name": user.name,
-        "terminal": user.terminal,
-        "host": user.host,
-        "started": user.started,
-        "pid": user.pid,
+        "name": get_property_safe(lambda: user.name),
+        "terminal": get_property_safe(lambda: user.terminal),
+        "host": get_property_safe(lambda: user.host),
+        "started": get_property_safe(lambda: user.started),
+        "pid": get_property_safe(lambda: user.pid),
     }
 
 
 def parse_temperature(temperature):
     return {
-        "label": temperature.label,
-        "current": temperature.current,
-        "high": temperature.high,
-        "critical": temperature.critical,
+        "label": get_property_safe(lambda: temperature.label),
+        "current": get_property_safe(lambda: temperature.current),
+        "high": get_property_safe(lambda: temperature.high),
+        "critical": get_property_safe(lambda: temperature.critical),
     }
 
 
 def parse_fan(fan):
     return {
-        "label": fan.label,
-        "current": fan.current
+        "label": get_property_safe(lambda: fan.label),
+        "current": get_property_safe(lambda: fan.current)
     }
