@@ -336,9 +336,9 @@ It creates a data dump every n-seconds. (n can be changed in the config, default
 On supported devices you also see fan and battery metrics.
 
 ## Install
-1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases)
-2. Unzip as aw-watcher-utilization folder
-3. Move the folder to your [ActivityWatch directory](https://docs.activitywatch.net/en/latest/directories.html#data)
+1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases).
+2. Unzip as aw-watcher-utilization folder.
+3. Move the folder to your [ActivityWatch directory](https://docs.activitywatch.net/en/latest/directories.html#data).
 4. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the aw-qt directory find the aw-qt.toml file.
 5. Add the aw-table-utilization to autostart_modules to enable auto-start. It should look like this:
 
