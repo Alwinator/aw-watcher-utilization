@@ -36,10 +36,13 @@ jobs:
         env:
           PYTHON_VERSION: ${{ matrix.python-version }}.9
 
-      - name: Run image
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install poetry
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            choco install innosetup
+          fi
+          pip3 install poetry==${{ matrix.poetry-version }}
 
       - name: Disable virtualenvs
         run: poetry config virtualenvs.create false
