@@ -335,7 +335,7 @@ It creates a data dump every `n` seconds. (`n` can be changed in the config, def
 
 On supported devices, you also see fan and battery metrics.
 
-## Install
+## Installing
 1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases).
 2. Unzip as `aw-watcher-utilization` folder.
 3. Move the folder to your [ActivityWatch directory](https://docs.activitywatch.net/en/latest/directories.html#data).
@@ -355,7 +355,7 @@ chmod +x ./aw-watcher-utilization
 ## Testing
 Unfortunately, I have a limited number of computers, so bug reports are always very welcome!
 
-## Contribute
+## Contributing
 See [`DEV_SETUP.md`](DEV_SETUP.md).
 
 Thanks in advance!
