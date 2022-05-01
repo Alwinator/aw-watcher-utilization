@@ -38,11 +38,7 @@ jobs:
 
       - name: Install poetry
         shell: bash
-        run: |
-          if [ "$RUNNER_OS" == "Windows" ]; then
-            choco install innosetup
-          fi
-          pip3 install poetry==${{ matrix.poetry-version }}
+        run: pip3 install poetry==${{ matrix.poetry-version }}
 
       - name: Disable virtualenvs
         run: poetry config virtualenvs.create false
