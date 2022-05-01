@@ -347,7 +347,7 @@ On supported devices, you also see fan and battery metrics.
 [aw-qt]
 autostart_modules = ["aw-server", "aw-watcher-afk", "aw-watcher-window", "aw-watcher-utilization"]
 ```
-5. [Linux only]: Make the executable file in the `aw-watcher-utilization` folder executable:
+6. [Linux only]: Make the executable file in the `aw-watcher-utilization` folder executable:
 ```
 chmod +x ./aw-watcher-utilization
 ```
