@@ -8,8 +8,6 @@ on:
 
 jobs:
   build-release:
-    env:
-      MACOSX_DEPLOYMENT_TARGET: 10.9
     strategy:
       fail-fast: false
       matrix:
