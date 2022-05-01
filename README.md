@@ -356,6 +356,6 @@ chmod +x ./aw-watcher-utilization
 Unfortunately, I have a limited number of computers, so bug reports are always very welcome!
 
 ## Contribute
-Thanks in advance!
-
 See [`DEV_SETUP.md`](DEV_SETUP.md).
+
+Thanks in advance!
