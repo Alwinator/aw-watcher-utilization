@@ -17,14 +17,26 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        if: matrix.os != 'macOS-latest'
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Run image
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: ${{ matrix.poetry-version }}
+      # Based on: https://github.com/actions/virtual-environments/issues/1256#issuecomment-770270252
+      - name: Set up Python for macOS
+        if: matrix.os == 'macOS-latest'
+        run: |
+          curl https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-macosx10.9.pkg -o "python.pkg"
+          sudo installer -pkg python.pkg -target /
+          echo "/Library/Frameworks/Python.framework/Versions/${{ matrix.python-version }}/bin" >> $GITHUB_PATH
+        env:
+          PYTHON_VERSION: ${{ matrix.python-version }}.9
+
+      - name: Install poetry
+        shell: bash
+        run: pip3 install poetry==${{ matrix.poetry-version }}
 
       - name: Disable virtualenvs
         run: poetry config virtualenvs.create false
