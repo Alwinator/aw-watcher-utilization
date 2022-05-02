@@ -2,9 +2,9 @@
 [![Create releases for Linux and Windows](https://github.com/Alwinator/aw-watcher-utilization/actions/workflows/build-release.yml/badge.svg)](https://github.com/Alwinator/aw-watcher-utilization/actions/workflows/build-release.yml)
 [![stars](https://img.shields.io/github/stars/Alwinator/aw-watcher-utilization)](https://github.com/Alwinator/aw-watcher-utilization)
 
-An [Activity Watch](https://github.com/ActivityWatch/activitywatch) watcher that monitors CPU, RAM, disk, network, and sensor usage. It is basically a [psutil](https://github.com/giampaolo/psutil) wrapper for [Activity Watch](https://github.com/ActivityWatch/activitywatch). I have only left out some information that was too detailed.
+An [ActivityWatch](https://github.com/ActivityWatch/activitywatch) watcher that monitors CPU, RAM, disk, network, and sensor usage. It is basically a [`psutil`](https://github.com/giampaolo/psutil) wrapper for [ActivityWatch](https://github.com/ActivityWatch/activitywatch). I have only left out some information that was too detailed.
 
-It creates a data dump every n-seconds. (n can be changed in the config, default 5 seconds). Here is an example data dump:
+It creates a data dump every `n` seconds. (`n` can be changed in the config, default 5 seconds). Here is an example data dump:
 <details>
 <summary>Expand to see the data dump</summary>
 <pre>
@@ -333,29 +333,29 @@ It creates a data dump every n-seconds. (n can be changed in the config, default
 </pre>
 </details>
 
-On supported devices you also see fan and battery metrics.
+On supported devices, you also see fan and battery metrics.
 
-## Install
-1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases)
-2. Unzip as aw-watcher-utilization folder
-3. Move the folder to your activity watch directory
-4. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the aw-qt directory find the aw-qt.toml file.
-5. Add the aw-table-utilization to autostart_modules to enable auto-start. It should look like this:
+## Installing
+1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases).
+2. Unzip as `aw-watcher-utilization` folder.
+3. Move the folder to your [ActivityWatch directory](https://docs.activitywatch.net/en/latest/directories.html#data).
+4. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the `aw-qt` directory, find the `aw-qt.toml` file.
+5. Add the `aw-table-utilization` to `autostart_modules` to enable auto-start. It should look like this:
 
-aw-qt.toml:
+`aw-qt.toml`:
 ```
 [aw-qt]
 autostart_modules = ["aw-server", "aw-watcher-afk", "aw-watcher-window", "aw-watcher-utilization"]
 ```
-5. [Linux only]: Make the executable file in the aw-watcher-utilization folder executable:
+6. [Linux only]: Make the executable file in the `aw-watcher-utilization` folder executable:
 ```
 chmod +x ./aw-watcher-utilization
 ```
 
 ## Testing
-Unfortunately, I have a limited amount of computers, so bug reports are always very welcomed!
+Unfortunately, I have a limited number of computers, so bug reports are always very welcome!
 
-## Contribute
+## Contributing
+See [`DEV_SETUP.md`](DEV_SETUP.md).
+
 Thanks in advance!
-
-See [DEV_SETUP](DEV_SETUP.md).
