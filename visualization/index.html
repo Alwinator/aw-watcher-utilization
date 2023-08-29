@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aw-watcher-utilization</title>
+    <style>
+        body{
+            font-family: sans-serif;
+            overflow: hidden;
+            margin: 0;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+Loading...
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
+<script>
+    // A small hack to make the aw-client work in the browser without webpack
+    const exports = {};
+    function require(name){
+        if (name === 'axios') {
+            return axios;
+        }
+        throw new Error(`Cannot find module '${name}'`);
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/aw-client@0.3.4/out/aw-client.min.js"></script>
+<script defer>
+    const urlParams = new URLSearchParams(window.location.search);
+    const start = urlParams.get('start');
+    const end = urlParams.get('end');
+    const hostname = urlParams.get('hostname');
+    const title = urlParams.get('title') || 'cpu_percent';
+
+    const client = new AWClient('test-client', {testing: true});
+
+    function avg(arr) {
+        return arr.reduce((a, b) => a + b, 0) / arr.length;
+    }
+    function round(num) {
+        return Math.round((num + Number.EPSILON) * 100) / 100
+    }
+    function getScale(){
+        if(title === 'cpu_percent'){
+            return {
+                min: 0,
+                max: 100
+            }
+        }
+    }
+    function getValue(data){
+        if(title === 'cpu_percent'){
+            return round(avg(data.cpu.percent));
+        }
+    }
+
+    client.query([`${start}/${end}`], [`RETURN = limit_events(query_bucket("aw-watcher-utilization_${hostname}"), 10);`]).then((awData) => {
+        const data = {
+          datasets: [{
+            label: 'CPU Percentage',
+            data: awData[0].map((d) => ({x: new Date(d.timestamp), y: getValue(d.data)})),
+            fill: true,
+            borderColor: 'rgb(41, 255, 1)',
+            tension: 0.25
+          }]
+        };
+        const ctx = document.createElement('canvas');
+        new Chart(ctx,{
+          type: 'line',
+          data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        // min: new Date(start),
+                        // max: new Date(end)
+                    },
+                    y: {
+                        ...getScale()
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+        document.body.removeChild(document.body.firstChild);
+        document.body.appendChild(ctx);
+    }).catch((err) => {
+        document.body.innerText = err.message;
+    });
+</script>
+</html>

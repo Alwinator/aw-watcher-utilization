@@ -351,6 +351,32 @@ autostart_modules = ["aw-server", "aw-watcher-afk", "aw-watcher-window", "aw-wat
 ```
 chmod +x ./aw-watcher-utilization
 ```
+7. (Optional, but recommended) Enable custom visualizations (See next section)
+
+## Custom Visualizations
+### Setup
+1. Add the following section to your `aw-server.toml` file in the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config):
+```toml
+[server.custom_static]
+aw-watcher-utilization = "/home/user/path/to/aw-watcher-utilization/visualization"
+```
+
+2. Do not forget to change the path to your path!
+3. Restart ActivityWatch
+4. Add custom visualizations from the Activity Watch GUI: `Activity > Edit View > Add Visualization > Custom Visualization`
+5. Enter `aw-watcher-utilization` for watcher name and pick one of the following titles of the next section.
+
+![add_custom_visualization.png](images%2Fadd_custom_visualization.png)
+
+6. Enjoy!
+
+
+
+### Visualizations
+#### CPU
+Title: `cpu_percent`
+
+![custom_visualization.png](images/custom_visualization.png)
 
 ## Testing
 Unfortunately, I have a limited number of computers, so bug reports are always very welcome!
