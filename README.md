@@ -338,7 +338,7 @@ On supported devices, you also see fan and battery metrics.
 ## Installing
 1. Download the latest release [here](https://github.com/Alwinator/aw-watcher-utilization/releases).
 2. Unzip as `aw-watcher-utilization` folder.
-3. Move the folder to your [ActivityWatch directory](https://docs.activitywatch.net/en/latest/directories.html#data).
+3. Move the folder to the directly ActivityWatch is installed. Depends on OS. [See ActivityWatch docs](https://docs.activitywatch.net/en/latest/directories.html#data).
 4. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the `aw-qt` directory, find the `aw-qt.toml` file.
 5. Add the `aw-table-utilization` to `autostart_modules` to enable auto-start. It should look like this:
 
@@ -347,7 +347,7 @@ On supported devices, you also see fan and battery metrics.
 [aw-qt]
 autostart_modules = ["aw-server", "aw-watcher-afk", "aw-watcher-window", "aw-watcher-utilization"]
 ```
-6. [Linux only]: Make the executable file in the `aw-watcher-utilization` folder executable:
+6. [Linux & MacOS only]: Make the executable file in the `aw-watcher-utilization` folder executable:
 ```
 chmod +x ./aw-watcher-utilization
 ```
