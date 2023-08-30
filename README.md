@@ -363,7 +363,7 @@ aw-watcher-utilization = "/home/user/path/to/aw-watcher-utilization/visualizatio
 For example on Windows:
 ```toml
 [server.custom_static]
-aw-watcher-utilization = "C:\Users\<USER>\AppData\Local\activitywatch\activitywatch\aw-watcher-utilization\visualization"
+aw-watcher-utilization = '''C:\Users\<USER>\AppData\Local\activitywatch\activitywatch\aw-watcher-utilization\visualization'''
 ```
 
 2. Do not forget to change the path to your path!
