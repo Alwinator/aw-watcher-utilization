@@ -37,7 +37,7 @@ Loading...
     const hostname = urlParams.get('hostname');
     const title = urlParams.get('title') || 'cpu_percent';
 
-    const client = new AWClient('test-client', {testing: false});
+    const client = new AWClient('test-client', {testing: window.location.port === "5666"});
 
     function avg(arr) {
         return arr.reduce((a, b) => a + b, 0) / arr.length;
