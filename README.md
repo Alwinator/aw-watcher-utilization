@@ -366,7 +366,7 @@ For example on Windows:
 aw-watcher-utilization = '''C:\Users\<USER>\AppData\Local\activitywatch\activitywatch\aw-watcher-utilization\visualization'''
 ```
 
-2. Do not forget to change the path to your path!
+2. Do not forget to change the path to your path and make sure you added it to `aw-server.toml` NOT `aw-qt.toml`.
 3. Restart ActivityWatch
 4. Add custom visualizations from the Activity Watch GUI: `Activity > Edit View > Add Visualization > Custom Visualization`
 5. Enter `aw-watcher-utilization` for the watcher name and pick one of the following titles of the next section.
