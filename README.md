@@ -340,7 +340,7 @@ On supported devices, you also see fan and battery metrics.
 2. Unzip as `aw-watcher-utilization` folder.
 3. Move the folder to the directly ActivityWatch is installed (depends on your setup). For example, on Windows: `C:\Users\<USER>\AppData\Local\activitywatch\activitywatch\aw-watcher-utilization`
 4. Go to the [config directory](https://docs.activitywatch.net/en/latest/directories.html#config). In the `aw-qt` directory, find the `aw-qt.toml` file.
-5. Add the `aw-watcher-utilization` to `autostart_modules` to enable auto-start. It should look like this:
+5. Add the `aw-watcher-utilization` to `autostart_modules` to enable auto-start. Make sure to remove the `#` before autostart_modules in case there are any. It should look like this:
 
 `aw-qt.toml`:
 ```
