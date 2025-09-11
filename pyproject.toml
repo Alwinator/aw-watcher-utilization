@@ -18,7 +18,7 @@ aw-core = {git = "https://github.com/ActivityWatch/aw-core.git"}
 aw-client = {git = "https://github.com/ActivityWatch/aw-client.git"}
 
 [tool.poetry.dev-dependencies]
-pyinstaller = "^5.13"
+pyinstaller = "^6.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
